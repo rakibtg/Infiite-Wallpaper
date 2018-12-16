@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unsplash Wallpaper</title>
+  <style type="text/css">
+    html, body {
+      padding: 0px; margin: 0px;
+      height: 100%; width: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+<img src="">
+
+<script type="text/javascript">
+  
+  let     image   = document.images[0]
+  const   topics  = ""
+
+  function fetch_image() {
+    var xhr = new XMLHttpRequest()
+    xhr.open("GET", "https://source.unsplash.com/"+document.body.clientWidth+"x"+document.body.clientHeight+topics)
+    xhr.responseType = "blob"
+    xhr.onload = response
+    xhr.send()
+  }
+
+  function response(e) {
+     var urlCreator = window.URL || window.webkitURL
+     var imageUrl = urlCreator.createObjectURL(this.response)
+     document.images[0]['src'] = imageUrl
+  }
+
+  // const new_image = () => {
+  //   return new Promise( async (resolve, reject) => {
+  //     let downloadingImage = new Image()
+  //     downloadingImage.onload = await function() {
+  //         resolve(this)
+  //     }
+  //     downloadingImage.src = "https://source.unsplash.com/"+document.body.clientWidth+"x"+document.body.clientHeight+"/?nature"
+  //   })
+  // }
+
+  // new_image().then(res => { image.src = res.src })
+
+  setInterval(() => {
+    fetch_image()
+    // new_image().then(res => {
+    //   console.log(res)
+    //   image.src = ''
+    //   image.src = res.src
+    // })
+    // console.log('inside interval')
+  }, 50000)
+
+</script>
+</body>
+</html>
